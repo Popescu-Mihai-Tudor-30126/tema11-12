@@ -1,5 +1,7 @@
 package aut.utcluj.isp.ex3;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,13 +10,19 @@ import java.util.Map;
  */
 public class EquipmentController {
 
+    private List<Equipment> equipmentList;
+
+    public EquipmentController() {
+        this.equipmentList = new ArrayList<>();
+    }
+
     /**
      * Add new equipment to the list of equipments
      *
      * @param equipment - equipment to be added
      */
     public void addEquipment(final Equipment equipment) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.equipmentList.add(equipment);
     }
 
     /**
@@ -23,7 +31,7 @@ public class EquipmentController {
      * @return list of equipments
      */
     public List<Equipment> getEquipments() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.equipmentList;
     }
 
     /**
@@ -32,7 +40,7 @@ public class EquipmentController {
      * @return number of equipments
      */
     public int getNumberOfEquipments() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.equipmentList.size();
     }
 
     /**
@@ -41,7 +49,18 @@ public class EquipmentController {
      * @return a dictionary where the key is the owner and value is represented by list of equipments he owns
      */
     public Map<String, List<Equipment>> getEquipmentsGroupedByOwner() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Map<String, List<Equipment>> equipmentByOwner = new HashMap<>();
+        for (Equipment equipment : this.equipmentList) {
+            String owner = equipment.getOwner();
+            if (equipmentByOwner.containsKey(owner)) {
+                equipmentByOwner.get(owner).add(equipment);
+            } else {
+                List<Equipment> equipments = new ArrayList<>();
+                equipments.add(equipment);
+                equipmentByOwner.put(owner, equipments);
+            }
+        }
+        return equipmentByOwner;
     }
 
     /**
@@ -50,6 +69,12 @@ public class EquipmentController {
      * @return deleted equipment instance or null if not found
      */
     public Equipment removeEquipmentBySerialNumber(final String serialNumber) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Equipment equipment : equipmentList) {
+            if (equipment.getSerialNumber().equals(serialNumber)) {
+                equipmentList.remove(equipment);
+                return equipment;
+            }
+        }
+        return null;
     }
 }
