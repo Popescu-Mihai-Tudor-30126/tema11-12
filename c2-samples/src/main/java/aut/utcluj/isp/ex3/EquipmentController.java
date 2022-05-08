@@ -4,16 +4,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JTextField;
+import jdk.nashorn.internal.objects.annotations.Getter;
 
 /**
  * @author stefan
  */
 public class EquipmentController {
-
+    
     private List<Equipment> equipmentList;
+    public String[] equipmentNames = {};
+    public String[] owner={};
 
     public EquipmentController() {
         this.equipmentList = new ArrayList<>();
+    }
+    
+    public void EquipmentNames(){
+    List<String> eqNames = new ArrayList<>();
+    for(Equipment i : equipmentList)
+        eqNames.add(i.getName());
+    equipmentNames = (String[]) eqNames.toArray(new String[eqNames.size()]);
+    }
+    
+    public String[] getEquipmentNames(){
+        return equipmentNames;
     }
 
     /**
@@ -23,6 +38,7 @@ public class EquipmentController {
      */
     public void addEquipment(final Equipment equipment) {
         this.equipmentList.add(equipment);
+      
     }
 
     /**
@@ -61,6 +77,13 @@ public class EquipmentController {
             }
         }
         return equipmentByOwner;
+    }
+    
+    public void Owners(){
+    List<String> owners = null;
+    for (Equipment j:equipmentList)
+    owners.add(j.getOwner());
+    owner = (String[]) owners.toArray(new String[owners.size()]);
     }
 
     /**
