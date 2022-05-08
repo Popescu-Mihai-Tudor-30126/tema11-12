@@ -1,5 +1,7 @@
 package aut.utcluj.isp.ex3;
 
+import javax.swing.JTextField;
+
 /**
  * @author stefan
  */
