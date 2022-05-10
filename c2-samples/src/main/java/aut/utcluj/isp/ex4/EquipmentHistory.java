@@ -17,10 +17,11 @@ public class EquipmentHistory {
     /**
      * Add new history details
      *
-     * @param owner        - ownen
-     * @param operation    - operation ({@link Operation})
-     * @param providedDate - provided date of the operation
+     * @param owner           - ownen
+     * @param operation       - operation ({@link Operation})
+     * @param providedDate    - provided date of the operation
      */
+
     public void addEquipmentHistory(final String owner, final Operation operation, final LocalDateTime providedDate) {
         historyDetailsList.add(new EquipmentHistoryDetails(owner, operation, providedDate));
     }

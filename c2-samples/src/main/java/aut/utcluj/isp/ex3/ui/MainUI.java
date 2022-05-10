@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MainUI {
+    private final EquipmentController equipmentController;
     private JPanel rootPanel;
     private JPanel tablePanel;
     private JPanel mainControls;
@@ -32,7 +33,6 @@ public class MainUI {
     private JButton viewButton;
     private JTextField searchOwnerField;
     private JButton searchOwnerButton;
-    private final EquipmentController equipmentController;
 
 
     public MainUI() {
@@ -97,35 +97,33 @@ public class MainUI {
                 String name = nameField.getText();
                 String owner = ownerField.getText();
 
-                if(!Objects.equals(serial, "")){
+                if (!Objects.equals(serial, "")) {
                     //add by serial 'n' name
-                    if((!Objects.equals(name, ""))&&(Objects.equals(owner, ""))){
-                        equipmentController.addEquipment(new Equipment(name,serial));
+                    if ((!Objects.equals(name, "")) && (Objects.equals(owner, ""))) {
+                        equipmentController.addEquipment(new Equipment(name, serial));
                         createTable(equipmentController.getEquipments());
                         addPanel.setVisible(false);
                         clearFields();
                         return;
                     }
                     //add by serial, name 'n' owner
-                    if((!Objects.equals(name, ""))&&(!Objects.equals(owner, ""))){
-                        equipmentController.addEquipment(new Equipment(name,serial,owner));
+                    if ((!Objects.equals(name, "")) && (!Objects.equals(owner, ""))) {
+                        equipmentController.addEquipment(new Equipment(name, serial, owner));
                         createTable(equipmentController.getEquipments());
                         addPanel.setVisible(false);
                         clearFields();
                         return;
                     }
                     //add by serial
-                    if(Objects.equals(name, "")){
+                    if (Objects.equals(name, "")) {
                         equipmentController.addEquipment(new Equipment(serial));
                         createTable(equipmentController.getEquipments());
                         addPanel.setVisible(false);
                         clearFields();
                     }
-                }
-                else {
+                } else {
                     //serial cannot be empty
-                    JOptionPane.showMessageDialog(new JFrame(),"Serial cannot be empty");
-                    clearFields();
+                    JOptionPane.showMessageDialog(new JFrame(), "Serial cannot be empty");
                 }
             }
         });
@@ -135,15 +133,13 @@ public class MainUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String serial = serialRemoveField.getText();
-                if(!Objects.equals(serial, "")) {
+                if (!Objects.equals(serial, "")) {
                     equipmentController.removeEquipmentBySerialNumber(serial);
                     createTable(equipmentController.getEquipments());
                     removePanel.setVisible(false);
                     clearFields();
-                }
-                else
-                    JOptionPane.showMessageDialog(new JFrame(),"Serial cannot be empty");
-                clearFields();
+                } else
+                    JOptionPane.showMessageDialog(new JFrame(), "Serial cannot be empty");
             }
         });
 
@@ -152,22 +148,16 @@ public class MainUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String owner = searchOwnerField.getText();
-                if(!owner.equals("")){
+                if (!owner.equals("")) {
                     Map<String, List<Equipment>> map = equipmentController.getEquipmentsGroupedByOwner();
                     List<Equipment> list = map.get(owner);
-                    if(list!=null) {
+                    if (list != null) {
                         createTable(list);
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), "Name not found");
                     }
-                    else
-                    {
-                        clearFields();
-                        JOptionPane.showMessageDialog(new JFrame(),"Name not found");
-                    }
-                }
-                else
-                {
-                    clearFields();
-                    JOptionPane.showMessageDialog(new JFrame(),"Name cannot be empty");
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Name cannot be empty");
                 }
             }
         });
@@ -179,15 +169,14 @@ public class MainUI {
                 new String[]{"Serial", "Name", "Owner", "Taken"}
         );
 
-        for(Equipment equipment:equipments)
-        {
-            model.addRow(new Object[]{equipment.getSerialNumber(),equipment.getName(),equipment.getOwner(),equipment.isTaken()});
+        for (Equipment equipment : equipments) {
+            model.addRow(new Object[]{equipment.getSerialNumber(), equipment.getName(), equipment.getOwner(), equipment.isTaken()});
         }
         table1.setModel(model);
     }
 
     //clear all JTextFields
-    private void clearFields(){
+    private void clearFields() {
         ownerField.setText("");
         serialField.setText("");
         nameField.setText("");
@@ -195,7 +184,7 @@ public class MainUI {
         searchOwnerField.setText("");
     }
 
-    public JPanel getRootPanel(){
+    public JPanel getRootPanel() {
         return rootPanel;
     }
 }

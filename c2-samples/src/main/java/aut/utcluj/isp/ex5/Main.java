@@ -1,11 +1,12 @@
-package aut.utcluj.isp.ex3;
+package aut.utcluj.isp.ex5;
 
-import aut.utcluj.isp.ex3.ui.MainUI;
+import aut.utcluj.isp.ex5.ui.MainUI;
 
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
+
+       public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -15,7 +16,7 @@ public class Main {
     }
 
 
-    private static void createGUI() {
+    private static void createGUI(){
         MainUI ui = new MainUI();
         JPanel root = ui.getRootPanel();
         JFrame frame = new JFrame();
@@ -25,4 +26,5 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
 }

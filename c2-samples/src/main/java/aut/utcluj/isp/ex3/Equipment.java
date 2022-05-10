@@ -63,4 +63,5 @@ public class Equipment {
         this.owner = null;
         this.taken = false;
     }
+
 }
